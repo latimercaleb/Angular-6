@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,25 +10,24 @@ export class HeaderComponent implements OnInit {
 
   newServerName = '';
   newServerContent = '';
-  
+  @Output() serverCreated = new EventEmitter<{name: string, serverContent: string}>();
+  @Output() blueprintCreated = new EventEmitter<{name: string, blueprintContent: string}>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  onAddServer() {
-    this.serverElements.push({
-      type: 'server',
-      name: this.newServerName,
-      content: this.newServerContent
+  onAddServer(nameInputRefHTMLElement) {
+    this.serverCreated.emit({
+      name: nameInputRefHTMLElement.value,
+      serverContent: this.newServerContent
     });
   }
 
-  onAddBlueprint() {
-    this.serverElements.push({
-      type: 'blueprint',
-      name: this.newServerName,
-      content: this.newServerContent
+  onAddBlueprint(serverNameRef) {
+    this.blueprintCreated.emit({
+      name: serverNameRef.value,
+      blueprintContent: this.newServerContent
     });
   }
 

@@ -2,15 +2,18 @@
     <div class="col-xs-12">
       <p>Add new Servers or blueprints!</p>
       <label>Server Name</label>
-      <input type="text" class="form-control" [(ngModel)]="newServerName">
+      <!--Two way binding, using ngModel-->
+      <!-- <input type="text" class="form-control" [(ngModel)]="newServerName"> -->
+      <!--Local Reference instead of 2-way bind since we only read data on button click-->
+      <input type="text" class="form-control" #serverNameRef>
       <label>Server Content</label>
       <input type="text" class="form-control" [(ngModel)]="newServerContent">
       <br>
       <button
         class="btn btn-primary"
-        (click)="onAddServer()">Add Server</button>
+        (click)="onAddServer(serverNameRef)">Add Server</button> <!--When using the ref it must be passed into the event and it will give the element to the handler to parse-->
       <button
         class="btn btn-primary"
-        (click)="onAddBlueprint()">Add Server Blueprint</button>
+        (click)="onAddBlueprint(serverNameRef)">Add Server Blueprint</button>
     </div>
 </div>
