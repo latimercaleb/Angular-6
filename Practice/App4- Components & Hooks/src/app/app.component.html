@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Bind it!</h1>
-      <h4>App <span class="badge">4</span>: Components & Hooks practice</h4>
+      <h4>App <span class="badge">4</span>: Components & Hooks Practice</h4>
       <ol>
         <li>Create three new components: GameControl, Odd and Even</li>
         <li>The GameControl Component should have buttons to start and stop the game</li>
@@ -14,5 +14,19 @@
         <li>Style the element (e.g. paragraph) holding your output text differently in both components</li>
       </ol>
     </div>
+  </div>
+  <hr>
+  <div class = 'row'>
+    <div class='col-md-12'>
+      <app-game-control (outputTick)="onGameTick($event)"></app-game-control>
+    </div>
+  </div>
+  <div class='row'>
+      <div class='col-md-6'>
+          <app-even [evenListArgs]="evenCollection"></app-even>
+      </div>
+      <div class='col-md-6'>
+        <app-odd [oddListArgs]="oddCollection"></app-odd>
+      </div>
   </div>
 </div>

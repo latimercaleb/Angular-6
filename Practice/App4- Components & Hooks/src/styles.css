@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap');
+
+h1,h2,h3,h4{
+    font-family: 'Lato',serif;
+}
+
+p,li{
+    font-family: 'Raleway',serif;
+}
