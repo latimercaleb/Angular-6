@@ -1,10 +1,8 @@
-# App 4 Components & Hooks
--  Create three new components: GameControl, Odd and Even
-- Game Control must have 2 buttons one to start game and one to stop it
+# App 4: Practice property & Event Binding 
+- Create three new components: GameControl, Odd and Even
+-  The GameControl Component should have buttons to start and stop the game
 - When starting the game, an event (holding a incrementing number) should get emitted each second (ref = setInterval())
--  The event should be listenable from outside the component
-- On each event tick there should be a number that should be listenable on the outside
-- On clicking the stop button clear the interval
+- The event should be listenable from outside the component
 - When stopping the game, no more events should get emitted (clearInterval(ref))
 - A new Odd component should get created for every odd number emitted, the same should happen for the Even Component (on even numbers)
 - Simply output Odd - NUMBER or Even - NUMBER in the two components
