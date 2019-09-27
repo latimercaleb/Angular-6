@@ -14,7 +14,6 @@ export class AppComponent {
   onGameTick(gameTick: {tickVal: number, timeOfTick: string}){
     this.timeStamp = gameTick.timeOfTick;
     this.numericValue = gameTick.tickVal;
-    // debugger;
     this.evenOrOdd();
   }
 

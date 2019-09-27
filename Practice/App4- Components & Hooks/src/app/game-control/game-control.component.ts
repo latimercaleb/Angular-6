@@ -11,7 +11,7 @@ export class GameControlComponent implements OnInit {
   counter: number = 0;
   counterID: any;
   dateTime: string;
-  @Output('outputTick') newTick: EventEmitter = new EventEmitter<{tickVal: number, timeOfTick: string}>();
+  @Output('outputTick') newTick = new EventEmitter<{tickVal: number, timeOfTick: string}>();
   ngOnInit() {
   }
 
