@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+            <li class="list-group-item" *ngFor="let number of oddNumbers" [ngClass]="{odd: number %2 !== 0}" [ngStyle]="{backgroundColor:number %2 !== 0 ? 'yellow' : 'pink'}">{{number}}</li>
+        </div>
+        <div *ngIf="!onlyOdd">
+            <li class="list-group-item" *ngFor="let number of evenNumbers"  [ngStyle]="{backgroundColor:number %2 !== 0 ? 'yellow' : 'pink'}">{{number}}</li>
+        </div>
+      </ul>
+      <ng-template [ngIf]="onlyOdd">
+        <p>Only odd w/out * notation</p>
+        <div>
+            <li class="list-group-item" *ngFor="let number of oddNumbers" [ngClass]="{odd: number %2 !== 0}" [ngStyle]="{backgroundColor:number %2 !== 0 ? 'yellow' : 'pink'}">{{number}}</li>
+        </div>
+      </ng-template>
+      <ng-template [appUnless]="!onlyOdd">
+          <p>Only odd w custom directive</p>
+          <div>
+              <li class="list-group-item" *ngFor="let number of oddNumbers" [ngClass]="{odd: number %2 !== 0}" [ngStyle]="{backgroundColor:number %2 !== 0 ? 'yellow' : 'pink'}">{{number}}</li>
+          </div>
+        </ng-template>
+      <p appHighlight>Special paragraph to test directive basic</p>
+      <p appBetterHighlighter>Special paragraph to test directive better</p>
+      <p appBetterHighlighter [defaultColor]="'red'" [highlightColor]="'yellow'">Special paragraph to test directive advanced</p>
+    </div>
+    <!--The value rendered in the DOM changes-->
+    <div [ngSwitch] ="value">
+      <p *ngSwitchCase="5">Value is 5</p>
+      <p *ngSwitchCase="10">Value is 10</p>
+      <p *ngSwitchCase="100">Value is 100</p>
+      <p *ngSwitchDefault>Value is default</p>
+    </div>
+  </div>
+</div>
