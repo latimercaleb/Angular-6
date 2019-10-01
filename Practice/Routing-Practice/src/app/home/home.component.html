@@ -3,5 +3,10 @@
 <button (click)="onLoadServers()" class='btn btn-primary'>Load Servers</button>
 <hr>
 <button (click)="onLoadServer(1)" class='btn btn-primary'>Load the Server with Query params</button>
-
+<hr>
+<p>Log in or out</p>
+<div class="btn-group" role="group" aria-label="Login behavior">
+    <button type="button" class="btn btn-primary" (click)='onLogin()'><span class='glyphicon glyphicon-log-in'></span> Login</button>
+    <button type="button" class="btn btn-secondary" (click)='onLogout()'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
+</div>
 
