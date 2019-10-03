@@ -50,8 +50,9 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if(!this.allowEdit){return true;}
-    if((this.serverName !== this.server.name || this.serverStatus !== this.server.status) &&!this.changesSave) {
+    // Actual logic of being able to leave current route goes here
+    if(!this.allowEdit){return true;} // Not allowed to edit anyway, leave
+    if((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && !this.changesSave) { // If changes are detected in the form, prompt
       return confirm('Are you sure you want to discard changes?');
     }else{
       return true;

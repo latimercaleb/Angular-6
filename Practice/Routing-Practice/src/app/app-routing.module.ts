@@ -11,6 +11,8 @@ import { EditServerComponent } from "./servers/edit-server/edit-server.component
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AuthGuard } from "./auth-guard.service";
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { ServerResolver } from "./servers/server/server-resolver.service";
 
 
 
@@ -21,15 +23,16 @@ const appRoutes:Routes = [
         {path: ':id/:name', component: UserComponent},
     ]},
     {path: 'servers',canActivateChild:[AuthGuard], component: ServersComponent, children:[
-        {path: ':id', component: ServerComponent},
+        {path: ':id', component: ServerComponent, resolve:{resolvedServer: ServerResolver}},
         {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]},
     ]},
-    {path: 'not-found', component:PageNotFoundComponent},
+    {path: 'not-found', component:ErrorPageComponent, data:{messageDataString: '404 page not found!'}},
+   // {path: 'not-found', component:PageNotFoundComponent},
     {path: '**', redirectTo: '/not-found'}
   ];
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, {useHash: true})
     ],
     exports: [RouterModule]
 })
