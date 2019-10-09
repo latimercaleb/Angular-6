@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   }
 
   onActivate(){
-    this.serviceUser.activatedEmitter.emit(true);
+    // this.serviceUser.activatedEmitter.emit(true);
+    this.serviceUser.activatedSubject.next(true); // Subjects get the next call as they are a different kind of observable
   }
 }
