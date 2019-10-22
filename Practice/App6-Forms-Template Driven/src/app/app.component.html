@@ -19,7 +19,7 @@
                          required
                          email
                          #email='ngModel'/>
-                  <span class="text-danger" *ngIf="email.dirty && email.invalid">Invalid email, requires @ sign</span>
+                  <span class="text-danger" *ngIf="email.touched && email.invalid">Invalid email, requires @ sign</span>
                 </div>
                 <div class='form-group'>
                   <label for='subscription'>Subscription Type</label>
@@ -37,15 +37,15 @@
                          minlength="3"
                          #password='ngModel'
                          required/>
-                  <span class="text-danger" *ngIf="password.dirty && password.invalid">Password too short, 3 chars at least</span>
+                  <span class="text-danger" *ngIf="password.touched && password.invalid">Password too short, 3 chars at least</span>
                 </div>
                 <button class='btn btn-primary' type='submit'>Submit</button>
               </form>
             </div>
           </div>
 
+          <!--On sucess try animating in the data results -->
           <div *ngIf="formSubmitted">
-            <!--On sucess try animating in the data results-->
             <hr>
             <div class="well well-lg">
               <p>Email Address: <span class="bg-info">{{data.email}}</span></p>
@@ -53,20 +53,6 @@
               <p>Password: <span class="bg-info">{{data.pass}}</span></p>
             </div>
           </div>
-      <!-- Use ngForm, use bootstrap 3 stuff  
-        
-          Add a Form with the following Inputs (and Validators)
-           1) Mail address (should not be empty and should be an email address)
-           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
-              Set "Advanced" as Default
-           3) A Password field (should not be empty)
-           4) A Submit Button
-
-           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
-
-           Upon submitting the form, you should simply print the Value of the Form to the Console.
-           Optionally, display it in your template.
-      -->
     </div>
   </div>
 </div>

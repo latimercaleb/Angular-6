@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,15 +9,16 @@ export class AppComponent {
   @ViewChild('appForm', {static: false}) myForm: NgForm;
   serviceTypes: string[] = [];
   formSubmitted: boolean;
-  data: {email: string, sub: string, pass: string} = {
-    email: '',
-    sub:'',
-    pass:''
-  };
+  data: {email: string, sub: string, pass: string} ;
 
   constructor(){
     this.serviceTypes.push('Basic', 'Advanced', 'Pro');
     this.formSubmitted = false;
+    this.data = {
+      email: '',
+      sub:'',
+      pass:''
+    }
   }
 
   handleSubmit(){
