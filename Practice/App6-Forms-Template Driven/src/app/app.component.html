@@ -12,13 +12,14 @@
                 <div class='form-group'>
                   <label for='email'>Email Address</label>
                   <input type='email' 
-                         placeholder="email" 
+                         placeholder="Email" 
                          class='form-control' 
                          name='email' 
                          ngModel
                          required
                          email
                          #email='ngModel'/>
+                  <span class="text-danger" *ngIf="email.dirty && email.invalid">Invalid email, requires @ sign</span>
                 </div>
                 <div class='form-group'>
                   <label for='subscription'>Subscription Type</label>
@@ -30,19 +31,27 @@
                   <label for='password'>Password</label>
                   <input type='password' 
                          class='form-control' 
-                         placeholder='password' 
+                         placeholder='Password' 
                          name='password' 
                          ngModel
+                         minlength="3"
                          #password='ngModel'
                          required/>
+                  <span class="text-danger" *ngIf="password.dirty && password.invalid">Password too short, 3 chars at least</span>
                 </div>
-                <button class='btn btn-primary' type='submit' >Submit</button>
+                <button class='btn btn-primary' type='submit'>Submit</button>
               </form>
             </div>
           </div>
 
-          <div>
+          <div *ngIf="formSubmitted">
             <!--On sucess try animating in the data results-->
+            <hr>
+            <div class="well well-lg">
+              <p>Email Address: <span class="bg-info">{{data.email}}</span></p>
+              <p>Subscription Type: <span class="bg-info">{{data.sub}}</span></p>
+              <p>Password: <span class="bg-info">{{data.pass}}</span></p>
+            </div>
           </div>
       <!-- Use ngForm, use bootstrap 3 stuff  
         
