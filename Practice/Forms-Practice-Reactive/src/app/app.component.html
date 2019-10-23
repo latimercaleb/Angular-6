@@ -10,8 +10,10 @@
             id="username"
             formControlName = "username"
             class="form-control"> <!--Tell angular the typescript name to map to the template-->
-            <span *ngIf="!newUserForm.get('userData.username').valid && newUserForm.get('userData.username').touched" 
-                  class="text-warning bg-danger">Please enter a valid username</span>
+            <span *ngIf="!newUserForm.get('userData.username').valid && newUserForm.get('userData.username').touched">
+              <span *ngIf="newUserForm.get('userData.username').errors?.required" class="text-warning bg-danger">Please enter a username</span>
+              <span *ngIf="newUserForm.get('userData.username').errors?.nameIsForbidden" class="text-warning bg-danger">Please enter a valid username</span>
+            </span>
         </div>
         <div class="form-group">
           <label for="email">email</label>
@@ -39,7 +41,7 @@
           </div>
         </div>
         <p *ngIf="!newUserForm.valid && newUserForm.touched" class="text-warning bg-danger">Form is invalid</p>
-        <button class="btn btn-primary" type="submit" [disabled]="!newUserForm.valid && newUserForm.touched">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
   </div>
