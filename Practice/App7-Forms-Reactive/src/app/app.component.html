@@ -2,7 +2,29 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <h1 class='header'>App 7: Forms Practice: Reactive Forms</h1>
-      
+       <form (ngSubmit)="onSubmit()" [formGroup]="appForm">
+         <div class='form-group'>
+          <label>Project Name: </label>
+          <input class='form-control' type="text" formControlName='projectName'/>
+          <span class='errorBlock' >
+
+          </span>
+         </div>
+         <div class='form-group'>
+          <label>Mail: </label>
+          <input class='form-control' type="text" formControlName='email'/>
+          <span class='errorBlock'>
+
+          </span>
+         </div>
+         <div class='form-group'>
+          <label>Project Status: </label>
+          <select class="form-control" formControlName='status'>
+            <option *ngFor="let state of statusCollection" [value]="state">{{state}}</option>
+          </select>
+         </div>
+         <button type='submit' class='btn btn-info'><span class='glyphicon glyphicon-ok'></span> Submit</button>
+       </form>
       <!--
           Create a Form with the following Controls and Validators
           1) Project Name (should not be empty)
@@ -16,6 +38,15 @@
 
           Upon submitting the form, simply print the value to the console
       -->
+      <!--On sucess try animating in the data results -->
+      <div *ngIf="submitted">
+          <hr>
+          <div class="well well-lg">
+            <p>Project Name:</p>
+            <p>Email:</p>
+            <p>Project Status:</p>
+          </div>
+        </div>
     </div>
   </div>
 </div>
