@@ -1,3 +1,16 @@
+<!--
+    Create a Form with the following Controls and Validators
+    1) Project Name (should not be empty)
+    2) Mail (should not be a empty and a valid email)
+    3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+    4) Submit Button
+
+    Add your own Validator which doesn't allow "Test" as a Project Name
+
+    Also implement that Validator as an async Validator (replace the other one)
+
+    Upon submitting the form, simply print the value to the console
+-->
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
@@ -6,45 +19,45 @@
          <div class='form-group'>
           <label>Project Name: </label>
           <input class='form-control' type="text" formControlName='projectName'/>
-          <span class='errorBlock' >
-
+          <span class='errorBlock text-danger' *ngIf="!appForm.get('projectName').valid && appForm.get('projectName').touched">
+            <p *ngIf="appForm.get('projectName').errors?.required">Field is required</p>
+            <p *ngIf="appForm.get('projectName').errors?.nameIsNotAllowed">Field cannot use the name of "Test"</p>
           </span>
          </div>
+
          <div class='form-group'>
           <label>Mail: </label>
           <input class='form-control' type="text" formControlName='email'/>
-          <span class='errorBlock'>
-
+          <span class='errorBlock text-danger' *ngIf="!appForm.get('email').valid && appForm.get('email').touched">
+              <p *ngIf="appForm.get('email').errors?.required">Field is required</p>
+              <p *ngIf="appForm.get('email').errors?.email">Field must be a valid email</p>
+              <p *ngIf="appForm.get('email').errors?.emailUserNameIsNotAllowed">Field cannot contain username of "Test"</p>
+              <p *ngIf="appForm.get('email').errors?.emailDomainNameIsNotAllowed">Field cannot contain domain name of "Test"</p>
           </span>
          </div>
+
          <div class='form-group'>
           <label>Project Status: </label>
           <select class="form-control" formControlName='status'>
             <option *ngFor="let state of statusCollection" [value]="state">{{state}}</option>
           </select>
          </div>
-         <button type='submit' class='btn btn-info'><span class='glyphicon glyphicon-ok'></span> Submit</button>
+         <span class='errorBlock text-danger' *ngIf="!appForm.valid && appForm.touched">
+           <p>The app form is invalid. Please see the above fields</p>
+        </span>
+        <div class='btn-toolbar'>
+          <button type='submit' class='btn btn-info'><span class='glyphicon glyphicon-ok'></span> Submit</button>
+          <button type='button' class='btn btn-warning' (click)="appForm.reset({'status': 'Stable'})"><span class='glyphicon glyphicon-trash'></span> Clear</button>
+        </div>
        </form>
-      <!--
-          Create a Form with the following Controls and Validators
-          1) Project Name (should not be empty)
-          2) Mail (should not be a empty and a valid email)
-          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
-          4) Submit Button
-
-          Add your own Validator which doesn't allow "Test" as a Project Name
-
-          Also implement that Validator as an async Validator (replace the other one)
-
-          Upon submitting the form, simply print the value to the console
-      -->
       <!--On sucess try animating in the data results -->
       <div *ngIf="submitted">
           <hr>
+          <h4>Form Data: </h4>
           <div class="well well-lg">
-            <p>Project Name:</p>
-            <p>Email:</p>
-            <p>Project Status:</p>
+            <p>Project Name: {{formRender.name}}</p>
+            <p>Email: {{formRender.email}}</p>
+            <p>Project Status:{{formRender.status}}</p>
           </div>
         </div>
     </div>

@@ -6,3 +6,7 @@
   text-decoration: underline;
   margin-bottom: 30px;
 }
+
+.errorBlock{
+  opacity: 0.9;
+}
