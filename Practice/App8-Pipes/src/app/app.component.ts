@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  sortOn: boolean = false;
   appStatus = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('stable');
