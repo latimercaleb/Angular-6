@@ -10,15 +10,19 @@
       <br>
       <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
       <br><br>
-      <h2>App Status: {{ appStatus | async}}</h2>
+      <h2>App 8- Pipes, App Status: {{ appStatus | async}}</h2>
       <hr>
       <button class='btn' 
               (click)='sortOn = !sortOn'
-              [ngClass]="{swap glypohicons & btwn bttn priime and button info on click as well}">{{sortOn? 'Sort On' : 'Sort Off'}}</button>
+              [ngClass]="{'btn-primary': sortOn, 'btn-warning': !sortOn}">
+              <span class='glyphicon' 
+                    [ngClass]="{'glyphicon-sort':sortOn, 'glyphicon-cog': !sortOn}"></span> 
+              {{sortOn ? 'Sort Active' : 'Sort Off'}}
+      </button>
       <hr>
       <ul class="list-group">
         <li class="list-group-item"
-          *ngFor="let server of servers"
+          *ngFor="let server of servers | sort:sortOn"
           [ngClass]="getStatusClasses(server)">
           <span
             class="badge">
