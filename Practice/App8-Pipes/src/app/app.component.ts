@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  sortOn: boolean = false;
+export class AppComponent implements OnInit {
+  sortOn: number;
   appStatus = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('stable');
@@ -39,6 +39,9 @@ export class AppComponent {
     }
   ];
   filteredStatus = '';
+  ngOnInit(){
+    this.sortOn = 0;
+  }
   getStatusClasses(server: {instanceType: string, name: string, status: string, started: Date}) {
     return {
       'list-group-item-success': server.status === 'stable',
@@ -53,5 +56,15 @@ export class AppComponent {
       status: 'stable',
       started: new Date(15, 1, 2017)
     });
+  }
+
+  adjustSort(){
+    if(this.sortOn == 0){
+      this.sortOn = 1;
+    }else if(this.sortOn == 1){
+      this.sortOn = -1;
+    }else{
+      this.sortOn = 0;
+    }
   }
 }

@@ -13,11 +13,13 @@
       <h2>App 8- Pipes, App Status: {{ appStatus | async}}</h2>
       <hr>
       <button class='btn' 
-              (click)='sortOn = !sortOn'
-              [ngClass]="{'btn-primary': sortOn, 'btn-warning': !sortOn}">
+              (click)='adjustSort()'
+              [ngClass]="{'btn-primary': sortOn == 1, 'btn-warning': sortOn == -1, 'btn-info': sortOn == 0}">
               <span class='glyphicon' 
-                    [ngClass]="{'glyphicon-sort':sortOn, 'glyphicon-cog': !sortOn}"></span> 
-              {{sortOn ? 'Sort Active' : 'Sort Off'}}
+                    [ngClass]="{'glyphicon-sort-by-alphabet':sortOn == 1, 'glyphicon-cog': sortOn == 0, 'glyphicon-sort-by-alphabet-alt': sortOn == -1}"></span> 
+              <span *ngIf='sortOn == 1'> Sort On</span>
+              <span *ngIf='sortOn == 0'> Sort Off</span>
+              <span *ngIf='sortOn == -1'> Sort Reverse</span>
       </button>
       <hr>
       <ul class="list-group">
