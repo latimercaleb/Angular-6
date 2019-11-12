@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-
+import { map } from 'rxjs/operators';
+import { Post } from './post.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
   @ViewChild('postForm', {static: false}) postForm: NgForm;
   constructor(private http: HttpClient) {}
 
@@ -17,13 +18,24 @@ export class AppComponent implements OnInit {
   }
 
   private getPosts(){
-    this.http.get('https://angular-practice-be.firebaseio.com/posts.json').subscribe(
-      (responseData) => {
+    // Use rxjs operators to transform the data
+    this.http.get('https://angular-practice-be.firebaseio.com/posts.json')
+    .pipe(
+      map((responseData: {[key: string]:Post}) => {
+        for(const key in responseData){
+          if(responseData.hasOwnProperty(key)){
+            this.loadedPosts.push({... responseData[key], id:key});
+          }
+        }
+        return this.loadedPosts;
+      }))
+    .subscribe(
+      (posts) => {
         console.log('Fetched data:');
-        console.log(responseData);
+        console.log(posts);
       });
   }
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
     console.log(`Sent post of : ${postData.title} & ${postData.content}`);
     this.http.post('https://angular-practice-be.firebaseio.com/posts.json', postData).subscribe( responseData => {
