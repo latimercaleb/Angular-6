@@ -19,7 +19,7 @@ export class PostService{
     }
 
     getPosts(){
-        this.http
+       return this.http
         .get<{[key:string ]:Post }>('https://angular-practice-be.firebaseio.com/posts.json')
         .pipe(
           map((responseData: {[key: string]:Post}) => {
@@ -30,10 +30,6 @@ export class PostService{
               }
             }
             return resultArr;
-          }))
-        .subscribe(
-          (posts) => {
-              console.log(posts);
-          });
+          }));
     }
 }
