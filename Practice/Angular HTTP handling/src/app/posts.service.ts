@@ -32,4 +32,8 @@ export class PostService{
             return resultArr;
           }));
     }
+
+    deletePosts(){
+        return this.http.delete('https://angular-practice-be.firebaseio.com/posts.json');
+    }
 }

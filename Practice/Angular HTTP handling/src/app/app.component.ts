@@ -41,6 +41,11 @@ export class AppComponent implements OnInit {
   }
 
   onClearPosts() {
-    // Implement delete method later
+    this.postsService.deletePosts().subscribe(
+      (someResponse: any) =>{
+        console.log(someResponse);
+      }
+    );
+    this.onFetchPosts();
   }
 }
