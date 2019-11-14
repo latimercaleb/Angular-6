@@ -14,7 +14,8 @@ export class PostService{
         let postData: Post = {title: title, content: content};
         this.http
         .post<{name:string}>('https://angular-practice-be.firebaseio.com/posts.json', postData, {
-          observe: 'response'
+          observe: 'response',
+          responseType: 'json'
         })
         .subscribe( responseData => {
             console.log(responseData);
