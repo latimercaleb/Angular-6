@@ -1,22 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 import { Post } from './post.model';
 import { PostService } from './posts.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
   fetching: boolean = false;
   error = null;
+  private errorSub: Subscription;
   @ViewChild('postForm', {static: false}) postForm: NgForm;
   constructor(private http: HttpClient, private postsService: PostService) {}
 
   ngOnInit() {
+    this.postsService.error.subscribe(errMms => {
+      this.error = errMms;
+    });
     this.fetching = true;
     this.postsService.getPosts()
     .subscribe(
@@ -25,7 +30,7 @@ export class AppComponent implements OnInit {
           this.fetching = false;
       }, 
       (error)=>{
-        this.error = error.message;
+        // this.error = error.message;
         console.log(error);
       });
   }
@@ -44,7 +49,7 @@ export class AppComponent implements OnInit {
           this.fetching = false;
       }, 
       (error)=>{
-        this.error = error.message;
+        // this.error = error.message;
         console.log(error);
       });
   }
@@ -56,5 +61,9 @@ export class AppComponent implements OnInit {
       }
     );
     this.onFetchPosts();
+  }
+
+  ngOnDestroy(){
+    this.errorSub.unsubscribe();
   }
 }
