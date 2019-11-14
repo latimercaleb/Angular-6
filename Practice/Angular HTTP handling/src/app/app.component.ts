@@ -12,6 +12,7 @@ import { PostService } from './posts.service';
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   fetching: boolean = false;
+  error = null;
   @ViewChild('postForm', {static: false}) postForm: NgForm;
   constructor(private http: HttpClient, private postsService: PostService) {}
 
@@ -22,6 +23,10 @@ export class AppComponent implements OnInit {
       (posts) => {
           this.loadedPosts = posts;
           this.fetching = false;
+      }, 
+      (error)=>{
+        this.error = error.message;
+        console.log(error);
       });
   }
 
@@ -37,6 +42,10 @@ export class AppComponent implements OnInit {
       (posts) => {
           this.loadedPosts = posts;
           this.fetching = false;
+      }, 
+      (error)=>{
+        this.error = error.message;
+        console.log(error);
       });
   }
 
