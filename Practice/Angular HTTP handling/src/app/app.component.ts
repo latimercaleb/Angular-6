@@ -30,7 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
           this.fetching = false;
       }, 
       (error)=>{
-        // this.error = error.message;
+        this.error = error.message;
+        this.fetching = false;
         console.log(error);
       });
   }
@@ -49,7 +50,8 @@ export class AppComponent implements OnInit, OnDestroy {
           this.fetching = false;
       }, 
       (error)=>{
-        // this.error = error.message;
+        this.error = error.message;
+        this.fetching = false;
         console.log(error);
       });
   }

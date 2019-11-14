@@ -54,6 +54,7 @@
       <div class = 'alert alert-danger' *ngIf='error'>
         <h2>An error has occured</h2>
         <p>{{error}}</p>
+        <button class='btn btn-warning' (click)='error=null'>Understood</button>
       </div>
       <p *ngIf='loadedPosts.length < 1 && !fetching'>No posts available!</p>
       <ul class='list-group' *ngIf='loadedPosts.length >= 1 && !fetching'>
