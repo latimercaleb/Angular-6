@@ -5,6 +5,7 @@ export class AuthInterceptorService implements HttpInterceptor{
     intercept(req: HttpRequest<any>,next: HttpHandler){
         console.log(req);
         console.log('Outbound Request intercepted!');
-        return next.handle(req);
+        const newRq = req.clone({headers: req.headers.append('TestingNewHeader', 'Falcon Armor')});
+        return next.handle(newRq);
     }
 }
