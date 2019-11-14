@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpEventType} from '@angular/common/http';
 import {Post} from './post.model';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap} from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,9 @@ export class PostService{
     createPost(title: string, content: string){
         let postData: Post = {title: title, content: content};
         this.http
-        .post<{name:string}>('https://angular-practice-be.firebaseio.com/posts.json', postData)
+        .post<{name:string}>('https://angular-practice-be.firebaseio.com/posts.json', postData, {
+          observe: 'response'
+        })
         .subscribe( responseData => {
             console.log(responseData);
         }, error => {
@@ -23,7 +25,10 @@ export class PostService{
 
     getPosts(){
        return this.http
-        .get<{[key:string ]:Post }>('https://angular-practice-be.firebaseio.com/posts.json')
+        .get<{[key:string ]:Post }>('https://angular-practice-be.firebaseio.com/posts.json', {
+          headers: new HttpHeaders({'Custom-Header':'Tacos'}),
+          params: new HttpParams().set('print','pretty')
+        })
         .pipe(
           map((responseData: {[key: string]:Post}) => {
             const resultArr = [];
@@ -44,6 +49,15 @@ export class PostService{
     }
 
     deletePosts(){
-        return this.http.delete('https://angular-practice-be.firebaseio.com/posts.json');
+        return this.http.delete('https://angular-practice-be.firebaseio.com/posts.json', {
+          observe: 'events'
+        }).pipe(tap(
+          evt=> {
+            console.log(evt);
+            if(evt.type === HttpEventType.Response){
+              console.log('Response was returned');
+            }
+          }
+        ));
     }
 }
