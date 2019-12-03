@@ -41,6 +41,25 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
         })),
         animate(1500)
       ])
+    ]),
+    trigger('toList', [
+      state('in', style({
+        opacity: 1,
+        transform: 'tranlateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100px)'
+        }),
+        animate(300)
+      ]),
+      transition('* => void', [
+        animate(300, style({
+          opacity: 0,
+          transform: 'translateX(100px)'
+        }))
+      ]),
     ])
   ]
 })
@@ -60,5 +79,9 @@ export class AppComponent {
 
     onShrink(){
       this.div2Anchor = 'shrunken';
+    }
+
+    onDelete(itm){
+      this.list.splice(itm,1);
     }
 }
