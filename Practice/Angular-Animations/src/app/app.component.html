@@ -3,9 +3,13 @@
     <div class="col-xs-12">
       <h1>Animations</h1>
       <button class="btn btn-primary" (click)='onAnimate()'>Animate!</button>
-      <button class="btn btn-primary">Shrink!</button>
+      <button class="btn btn-primary" (click)='onShrink()'>Shrink!</button>
       <hr>
       <div class='basicDiv' [@divTransform]='divAnchor'>
+
+      </div>
+      <br>
+      <div class='basicDiv' [@secondForm]='div2Anchor'>
 
       </div>
     </div>
