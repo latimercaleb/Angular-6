@@ -5,7 +5,10 @@
       <button class="btn btn-primary" (click)='onAnimate()'>Animate!</button>
       <button class="btn btn-primary" (click)='onShrink()'>Shrink!</button>
       <hr>
-      <div class='basicDiv' [@divTransform]='divAnchor'>
+      <div class='basicDiv' 
+           [@divTransform]='divAnchor' 
+           (@divTransform.start)='divTransformStarted($event)' 
+           (@divTransform.done)='divTransformEnded($event)'>
 
       </div>
       <br>
@@ -35,10 +38,10 @@
   <div class="row">
     <div class="col-xs-12">
       <ul class="list-group">
-        <li
+        <li [@toSecondList]
           class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+          (click)="onDelete(idx)"
+          *ngFor="let item of list; index as idx">
           {{ item }}
         </li>
       </ul>

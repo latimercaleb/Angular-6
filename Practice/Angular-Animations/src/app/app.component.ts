@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {trigger, state, style, transition, animate} from '@angular/animations';
+import {trigger, state, style, transition, animate, keyframes, group} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -60,6 +60,47 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
           transform: 'translateX(100px)'
         }))
       ]),
+    ]),
+    trigger('toSecondList', [
+      state('in', style({
+        opacity: 1,
+        transform: 'tranlateX(0)'
+      })),
+      transition('void => *',[
+        animate(1000, keyframes([
+          style({
+            transform: 'translateX(-100px)',
+            opacity: 0,
+            offset: 0
+          }),
+          style({
+            transform: 'translateX(-50px)',
+            opacity: 0.5,
+            offset: 0.3
+          }),
+          style({
+            transform: 'translateX(-20px)',
+            opacity: 1,
+            offset: 0.8
+          }),
+          style({
+            transform: 'translateX(0px)',
+            opacity: 1,
+            offset: 1
+          })
+        ]))
+      ]),
+      transition('* => void', [
+        group([
+          animate(300, style({
+            color: 'red'
+          })),
+          animate(800, style({
+            opacity: 0,
+            transform: 'translateX(100px)'
+          }))
+        ])
+      ]),
     ])
   ]
 })
@@ -83,5 +124,15 @@ export class AppComponent {
 
     onDelete(itm){
       this.list.splice(itm,1);
+    }
+
+    divTransformStarted(evt){
+      console.log('Evt Started');
+      console.log(evt)
+    }
+
+    divTransformEnded(evt){
+      console.log('Evt Ended');
+      console.log(evt)
     }
 }
