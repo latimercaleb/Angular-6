@@ -2,10 +2,12 @@
   <div class="row">
     <div class="col-xs-12">
       <h1>Animations</h1>
-      <button class="btn btn-primary">Animate!</button>
+      <button class="btn btn-primary" (click)='onAnimate()'>Animate!</button>
       <button class="btn btn-primary">Shrink!</button>
       <hr>
-      <div></div>
+      <div class='basicDiv' [@divTransform]='divAnchor'>
+
+      </div>
     </div>
   </div>
   <hr>
